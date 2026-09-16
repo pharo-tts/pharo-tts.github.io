@@ -288,7 +288,7 @@ document.addEventListener('mousemove', e=>{
 });
 
 // ---- evaluation charts: plain horizontal bars, PhARO in green, everything else grey ----
-const OURS='#1baf7a', GREY='#c9ced6', GREY2='#8a94a3';
+const OURS='#ff6a00', GREY='#c9ced6', GREY2='#8a94a3';
 const colorOf=n=>n.includes('PhARO')?OURS:(n==='SFT-only'?GREY2:GREY);
 // rows: {label, v, ci?, head?}  head = group header line
 function hbars(el,rows,{min,max,fmt=v=>v.toFixed(2)}){
