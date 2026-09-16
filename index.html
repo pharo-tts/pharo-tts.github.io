@@ -79,6 +79,21 @@
   td.gtc .m{color:var(--gt);}
   .na{color:#c2c7cf; font-size:12px;}
 
+  /* ---- evaluation charts ---- */
+  .charts{display:flex; flex-wrap:wrap; gap:28px; justify-content:center; align-items:flex-start;}
+  .fig{flex:1 1 440px; max-width:600px; border:1px solid var(--line); border-radius:12px; padding:16px 18px 12px; background:#fff;}
+  .fig h3{font-size:15px; margin:0 0 2px;}
+  .fig .cap{font-size:12.5px; color:var(--mut); margin:0 0 10px;}
+  .fig svg{width:100%; height:auto; display:block; font-family:inherit;}
+  .fig .ax{stroke:var(--line);} .fig .tick{font-size:11px; fill:var(--mut);} .fig .gl{font-size:12px; fill:var(--ink);}
+  .fig .val{font-size:11px; fill:var(--ink); font-weight:600; text-anchor:middle;}
+  .fig .leg{display:flex; flex-wrap:wrap; gap:6px 14px; font-size:12.5px; color:var(--mut); margin:8px 0 0;}
+  .fig .leg span{display:inline-flex; align-items:center; gap:6px;}
+  .fig .leg i{width:10px; height:10px; border-radius:3px; display:inline-block;}
+  .fig .leg b{color:var(--ink);}
+  .fig .note{font-size:12.5px; color:var(--mut); margin:10px 0 0;}
+  .fig .note b{color:var(--ink);}
+
   .foot{color:var(--mut); font-size:12.5px; margin-top:26px; border-top:1px solid var(--line); padding-top:16px;}
   .foot b{color:var(--ink);}
 
@@ -115,6 +130,24 @@
     <h2>Audio Samples</h2>
     <div class="tabs" id="tabs"></div>
   <div id="panel"></div>
+  </section>
+
+  <section id="eval">
+    <h2>Evaluation</h2>
+    <div class="charts">
+      <div class="fig">
+        <h3>Human evaluation on CSEAL</h3>
+        <p class="cap">14 bilingual/trilingual listeners, blind, 720 MOS ratings. Mean ± 95% CI, higher is better.</p>
+        <div id="fig-mos"></div>
+        <p class="note">Forced preference rank (1–3, lower is better): Base 2.31 · SFT-only 1.97 · <b>PhARO 1.72</b>.
+          Naturalness is unchanged; pronunciation MOS rises by <b>+1.19</b>.</p>
+      </div>
+      <div class="fig">
+        <h3>PFER on CSEAL by language pair</h3>
+        <p class="cap">Phonetic Feature Error Rate (%), lower is better. Hover a bar for its value.</p>
+        <div id="fig-pfer"></div>
+      </div>
+    </div>
   </section>
 
   <p class="foot">All audio loudness-normalized to −23 LUFS.</p>
@@ -227,6 +260,44 @@ function playToggle(btn){
   CURA.play().catch(reset);
 }
 document.addEventListener('click', e=>{ const b=e.target.closest('.pb'); if(b) playToggle(b); });
+
+// ---- evaluation charts (data from the paper) ----
+const COL={'Base':'#2a78d6','SFT-only':'#eb6834','PhARO (ours)':'#1baf7a','ElevenLabs v3':'#eda100','OpenAI':'#e87ba4','Gemini':'#008300'};
+const legend=series=>`<div class="leg">${series.map(n=>`<span><i style="background:${COL[n]}"></i>${n.includes('ours')?'<b>'+n+'</b>':n}</span>`).join('')}</div>`;
+// grouped chart: kind 'dot' (mean+CI) or 'bar'; data[group][series] = value or [value,ci]
+function chart(el,{groups,series,data,ymin,ymax,step,kind}){
+  const W=560,H=260,L=36,R=8,T=10,B=28,pw=W-L-R,ph=H-T-B;
+  const y=v=>T+ph*(1-(v-ymin)/(ymax-ymin)), gw=pw/groups.length, bw=kind==='dot'?48:Math.min(22,(gw-12)/series.length);
+  let o=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  for(let v=ymin;v<=ymax+1e-9;v+=step) o+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="tick" x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
+  groups.forEach((g,gi)=>{
+    const x0=L+gw*gi+(gw-bw*series.length)/2;
+    o+=`<text class="gl" x="${L+gw*(gi+.5)}" y="${H-8}" text-anchor="middle">${g}</text>`;
+    series.forEach((sn,si)=>{
+      const d=data[g][sn]; if(d==null) return;
+      const [v,ci]=Array.isArray(d)?d:[d,0]; const x=x0+bw*si, cx=x+bw/2, c=COL[sn];
+      if(kind==='bar'){
+        o+=`<rect x="${x+1}" y="${y(v)}" width="${bw-2}" height="${y(ymin)-y(v)}" rx="3" fill="${c}"><title>${sn}: ${v}</title></rect>`;
+      }else{
+        o+=`<line x1="${cx}" x2="${cx}" y1="${y(v+ci)}" y2="${y(v-ci)}" stroke="${c}" stroke-width="2"/>
+            <circle cx="${cx}" cy="${y(v)}" r="5" fill="${c}" stroke="#fff" stroke-width="2"><title>${sn}: ${v} ± ${ci}</title></circle>
+            <text class="val" x="${cx}" y="${y(v+ci)-6}">${v.toFixed(2)}</text>`;
+      }
+    });
+  });
+  $(el).innerHTML=o+'</svg>'+legend(series);
+}
+chart('fig-mos',{kind:'dot',ymin:1,ymax:5,step:1,groups:['Naturalness MOS','Pronunciation MOS'],series:['Base','SFT-only','PhARO (ours)'],
+  data:{'Naturalness MOS':{'Base':[3.30,.15],'SFT-only':[3.37,.15],'PhARO (ours)':[3.35,.14]},
+        'Pronunciation MOS':{'Base':[2.80,.15],'SFT-only':[3.57,.17],'PhARO (ours)':[3.99,.15]}}});
+chart('fig-pfer',{kind:'bar',ymin:0,ymax:15,step:5,groups:['Overall','en+ko','en+ja','en+zh','ja+ko','ko+zh'],
+  series:['Base','SFT-only','PhARO (ours)','ElevenLabs v3','OpenAI','Gemini'],
+  data:{Overall:{'Base':11.32,'SFT-only':10.79,'PhARO (ours)':7.60,'ElevenLabs v3':10.10,'OpenAI':10.82,'Gemini':11.52},
+        'en+ko':{'Base':13.16,'SFT-only':10.97,'PhARO (ours)':8.91,'ElevenLabs v3':10.97,'OpenAI':11.52,'Gemini':11.82},
+        'en+ja':{'Base':11.39,'SFT-only':12.53,'PhARO (ours)':10.07,'ElevenLabs v3':10.57,'OpenAI':11.63,'Gemini':11.28},
+        'en+zh':{'Base':6.64,'SFT-only':7.72,'PhARO (ours)':7.80,'ElevenLabs v3':9.07,'OpenAI':8.27,'Gemini':7.86},
+        'ja+ko':{'Base':9.77,'SFT-only':10.60,'PhARO (ours)':8.03,'ElevenLabs v3':8.95,'OpenAI':12.29,'Gemini':12.29},
+        'ko+zh':{'Base':14.46,'SFT-only':11.76,'PhARO (ours)':9.59,'ElevenLabs v3':10.55,'OpenAI':10.67,'Gemini':14.18}}});
 
 fetch("manifest.json").then(r=>r.json()).then(m=>{
   M=m;
