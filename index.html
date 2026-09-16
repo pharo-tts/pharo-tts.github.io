@@ -88,6 +88,7 @@
   .fig svg{width:100%; height:auto; display:block; font-family:inherit;}
   .fig .ax{stroke:var(--line);} .fig .tick{font-size:11px; fill:var(--mut);} .fig .gl{font-size:12px; fill:var(--ink);}
   .fig .val{font-size:11px; fill:var(--ink); font-weight:600; text-anchor:middle;}
+  .fig .two>div+div{margin-top:10px;} .fig h4{font-size:12.5px; margin:6px 0 2px; color:var(--mut); font-weight:600;}
   .fig .leg{display:flex; flex-wrap:wrap; gap:6px 14px; font-size:12.5px; color:var(--mut); margin:8px 0 0;}
   .fig .leg span{display:inline-flex; align-items:center; gap:6px;}
   .fig .leg i{width:10px; height:10px; border-radius:3px; display:inline-block;}
@@ -138,30 +139,31 @@
 
   <section id="eval">
     <h2>Evaluation</h2>
-    <p class="intro">MOS (Mean Opinion Score) is the standard subjective TTS measure: listeners hear a clip and rate it from 1 (bad) to 5 (excellent).
-      We collected two separate MOS scales, <b>naturalness</b> and <b>pronunciation correctness</b>, from 14 listeners fluent in both
-      languages of each pair, plus a forced ranking of the three systems on every item.</p>
+    <p class="intro">We ran a blind listening test on CSEAL with 14 listeners, each fluent in both languages of the pairs they rated.
+      Every listener heard the same sentence from Base, SFT-only and PhARO in random order without labels, and scored each clip
+      from 1 to 5 for <b>naturalness</b> and, separately, for <b>pronunciation correctness</b> of the embedded foreign words.
+      They then ranked the three clips by preference. In total: 720 ratings and 242 rankings.</p>
     <div class="charts">
       <div class="fig">
-        <h3>Human evaluation on CSEAL</h3>
-        <p class="cap">720 ratings, blind and in random order. Mean ± 95% CI, higher is better.</p>
-        <div id="fig-mos"></div>
+        <h3>Naturalness stays the same, pronunciation improves</h3>
+        <p class="cap">Mean opinion score, 1–5, higher is better. Whiskers are 95% confidence intervals.</p>
+        <div class="two"><div><h4>Naturalness</h4><div id="fig-nat"></div></div><div><h4>Pronunciation</h4><div id="fig-pron"></div></div></div>
       </div>
       <div class="fig">
-        <h3>Pronunciation MOS by language pair</h3>
-        <p class="cap">Items per system: en+ko 112 · en+ja 10 · en+zh 40 · ja+ko 30 · ko+zh 50. Mean ± 95% CI; en+ja is too small to conclude from.</p>
-        <div id="fig-mos-pair"></div>
-      </div>
-      <div class="fig">
-        <h3>PFER on CSEAL by language pair</h3>
-        <p class="cap">Phonetic Feature Error Rate (%) on the in-domain test set, lower is better. Hover a bar for its value.</p>
-        <div id="fig-pfer"></div>
-      </div>
-      <div class="fig">
-        <h3>Listener preference</h3>
-        <p class="cap">Same listeners ranked the three systems 1–3 per item (forced choice). Head-to-head win rate of PhARO, and mean rank (lower is better).</p>
+        <h3>Listeners prefer PhARO</h3>
+        <p class="cap">Share of head-to-head comparisons won, from the forced rankings.</p>
         <div id="fig-pref"></div>
-        <p class="note">Mean rank: Base 2.31 · SFT-only 1.97 · <b>PhARO 1.72</b>. Both head-to-heads p ≤ 0.0015.</p>
+        <p class="note">Mean rank out of 3, lower is better: Base 2.31 · SFT-only 1.97 · <b>PhARO 1.72</b>.</p>
+      </div>
+      <div class="fig">
+        <h3>Pronunciation score by language pair</h3>
+        <p class="cap">Pronunciation MOS, 1–5, higher is better. en+ja has only 10 items per system, so treat it as tentative.</p>
+        <div id="fig-pair"></div>
+      </div>
+      <div class="fig">
+        <h3>Lowest pronunciation error of all systems</h3>
+        <p class="cap">PFER on the CSEAL test set, in %, lower is better. Automatic metric used as the training reward.</p>
+        <div id="fig-pfer"></div>
       </div>
     </div>
   </section>
@@ -285,62 +287,48 @@ document.addEventListener('mousemove', e=>{
   tip.style.left=(e.clientX/z+12)+'px'; tip.style.top=(e.clientY/z-30)+'px';
 });
 
-// ---- evaluation charts (data from the paper) ----
-const COL={'Base':'#2a78d6','SFT-only':'#eb6834','PhARO (ours)':'#1baf7a','ElevenLabs v3':'#eda100','OpenAI':'#e87ba4','Gemini':'#008300'};
-const legend=series=>`<div class="leg">${series.map(n=>`<span><i style="background:${COL[n]}"></i>${n.includes('ours')?'<b>'+n+'</b>':n}</span>`).join('')}</div>`;
-// grouped chart: kind 'dot' (mean+CI) or 'bar'; data[group][series] = value or [value,ci]
-function chart(el,{groups,series,data,ymin,ymax,step,kind}){
-  const W=560,H=260,L=36,R=8,T=10,B=28,pw=W-L-R,ph=H-T-B;
-  const y=v=>T+ph*(1-(v-ymin)/(ymax-ymin)), gw=pw/groups.length, bw=kind==='dot'?Math.min(48,(gw-8)/series.length):Math.min(22,(gw-12)/series.length);
-  let o=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
-  for(let v=ymin;v<=ymax+1e-9;v+=step) o+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="tick" x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
-  groups.forEach((g,gi)=>{
-    const x0=L+gw*gi+(gw-bw*series.length)/2;
-    o+=`<text class="gl" x="${L+gw*(gi+.5)}" y="${H-8}" text-anchor="middle">${g}</text>`;
-    series.forEach((sn,si)=>{
-      const d=data[g][sn]; if(d==null) return;
-      const [v,ci]=Array.isArray(d)?d:[d,0]; const x=x0+bw*si, cx=x+bw/2, c=COL[sn];
-      if(kind==='bar'){
-        o+=`<rect x="${x+1}" y="${y(v)}" width="${bw-2}" height="${y(ymin)-y(v)}" rx="3" fill="${c}" data-tip="${sn}: ${v}"></rect>`;
-      }else{
-        o+=`<line x1="${cx}" x2="${cx}" y1="${y(v+ci)}" y2="${y(v-ci)}" stroke="${c}" stroke-width="2"/>
-            <circle cx="${cx}" cy="${y(v)}" r="5" fill="${c}" stroke="#fff" stroke-width="2" data-tip="${sn}: ${v} ± ${ci}"></circle>
-            <text class="val" x="${cx}" y="${y(v+ci)-6}">${v.toFixed(2)}</text>`;
-      }
-    });
+// ---- evaluation charts: plain horizontal bars, PhARO in green, everything else grey ----
+const OURS='#1baf7a', GREY='#c9ced6', GREY2='#8a94a3';
+const colorOf=n=>n.includes('PhARO')?OURS:(n==='SFT-only'?GREY2:GREY);
+// rows: {label, v, ci?, head?}  head = group header line
+function hbars(el,rows,{min,max,fmt=v=>v.toFixed(2)}){
+  const W=560, L=110, R=64, rh=24, gh=20; let y=6;
+  const x=v=>L+(W-L-R)*(v-min)/(max-min);
+  let o='';
+  rows.forEach(r=>{
+    if(r.head){ y+=6; o+=`<text class="gl" x="0" y="${y+12}" font-weight="700">${r.head}</text>`; y+=gh; return; }
+    const c=colorOf(r.label), b=r.label.includes('PhARO');
+    o+=`<text class="gl" x="${L-10}" y="${y+16}" text-anchor="end" ${b?'font-weight="700"':''}>${r.label}</text>
+        <rect x="${x(min)}" y="${y+3}" width="${x(r.v)-x(min)}" height="${rh-6}" rx="3" fill="${c}" data-tip="${r.label}: ${fmt(r.v)}${r.ci?' ± '+r.ci:''}"/>`;
+    if(r.ci) o+=`<line class="h" x1="${x(r.v-r.ci)}" x2="${x(r.v+r.ci)}" y1="${y+rh/2}" y2="${y+rh/2}"/>`;
+    o+=`<text class="gl" x="${x(r.ci?r.v+r.ci:r.v)+8}" y="${y+16}" ${b?'font-weight="700"':''}>${fmt(r.v)}</text>`;
+    y+=rh;
   });
-  $(el).innerHTML=o+'</svg>'+legend(series);
+  $(el).innerHTML=`<svg viewBox="0 0 ${W} ${y+6}" role="img">${o}</svg>`;
 }
+const SYS=['Base','SFT-only','PhARO (ours)'];
+const bars=(vals,cis)=>SYS.map((n,i)=>({label:n,v:vals[i],ci:cis&&cis[i]}));
+hbars('fig-nat', bars([3.30,3.37,3.35],[.15,.15,.14]), {min:1,max:5});
+hbars('fig-pron',bars([2.80,3.57,3.99],[.15,.17,.15]), {min:1,max:5});
+const PAIR={'en+ko':[[2.67,3.88,4.36],[.19,.19,.16]],'en+ja':[[2.00,1.80,1.80],[.72,.70,.64]],'en+zh':[[4.47,4.65,4.72],[.17,.26,.16]],
+            'ja+ko':[[2.53,2.30,2.60],[.36,.41,.39]],'ko+zh':[[2.12,3.18,3.88],[.26,.34,.33]]};
+hbars('fig-pair', Object.entries(PAIR).flatMap(([p,[v,c]])=>[{head:p},...bars(v,c)]), {min:1,max:5});
+hbars('fig-pfer', [['PhARO (ours)',7.60],['ElevenLabs v3',10.10],['SFT-only',10.79],['OpenAI',10.82],['Base',11.32],['Gemini',11.52]]
+  .map(([label,v])=>({label,v})), {min:0,max:13});
+// preference: two 100% bars
 (function(){
-  const rows=[['vs Base','Base',68],['vs SFT-only','SFT-only',60]], W=560,H=110,L=96,R=8,bh=30;
-  let o=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
-  rows.forEach(([lab,opp,win],i)=>{
-    const y=12+i*(bh+18), pw=W-L-R, w=pw*win/100;
+  const rows=[['vs Base',68],['vs SFT-only',60]], W=560,L=110,R=8,bh=26;
+  let o='';
+  rows.forEach(([lab,win],i)=>{
+    const y=8+i*(bh+14), pw=W-L-R, w=pw*win/100;
     o+=`<text class="gl" x="${L-10}" y="${y+bh/2+4}" text-anchor="end">${lab}</text>
-        <rect x="${L}" y="${y}" width="${w-1}" height="${bh}" rx="3" fill="${COL['PhARO (ours)']}" data-tip="PhARO wins ${win}%"/>
-        <rect x="${L+w+1}" y="${y}" width="${pw-w-1}" height="${bh}" rx="3" fill="${COL[opp]}" data-tip="${opp} wins ${100-win}%"/>
-        <text class="val" x="${L+w/2}" y="${y+bh/2+4}" fill="#fff" style="fill:#fff">PhARO ${win}%</text>
-        <text class="val" x="${L+w+(pw-w)/2}" y="${y+bh/2+4}" style="fill:#fff">${opp} ${100-win}%</text>`;
+        <rect x="${L}" y="${y}" width="${w-1}" height="${bh}" rx="3" fill="${OURS}" data-tip="PhARO preferred in ${win}% of comparisons"/>
+        <rect x="${L+w+1}" y="${y}" width="${pw-w-1}" height="${bh}" rx="3" fill="${GREY}" data-tip="${lab.slice(3)} preferred in ${100-win}%"/>
+        <text class="val" x="${L+w/2}" y="${y+bh/2+4}" style="fill:#fff">PhARO ${win}%</text>
+        <text class="val" x="${L+w+(pw-w)/2}" y="${y+bh/2+4}">${100-win}%</text>`;
   });
-  $("fig-pref").innerHTML=o+'</svg>';
+  $("fig-pref").innerHTML=`<svg viewBox="0 0 ${W} ${8+rows.length*(bh+14)}" role="img">${o}</svg>`;
 })();
-chart('fig-mos',{kind:'dot',ymin:1,ymax:5,step:1,groups:['Naturalness MOS','Pronunciation MOS'],series:['Base','SFT-only','PhARO (ours)'],
-  data:{'Naturalness MOS':{'Base':[3.30,.15],'SFT-only':[3.37,.15],'PhARO (ours)':[3.35,.14]},
-        'Pronunciation MOS':{'Base':[2.80,.15],'SFT-only':[3.57,.17],'PhARO (ours)':[3.99,.15]}}});
-chart('fig-mos-pair',{kind:'dot',ymin:1,ymax:5,step:1,groups:['en+ko','en+ja','en+zh','ja+ko','ko+zh'],series:['Base','SFT-only','PhARO (ours)'],
-  data:{'en+ko':{'Base':[2.67,.19],'SFT-only':[3.88,.19],'PhARO (ours)':[4.36,.16]},
-        'en+ja':{'Base':[2.00,.72],'SFT-only':[1.80,.70],'PhARO (ours)':[1.80,.64]},
-        'en+zh':{'Base':[4.47,.17],'SFT-only':[4.65,.26],'PhARO (ours)':[4.72,.16]},
-        'ja+ko':{'Base':[2.53,.36],'SFT-only':[2.30,.41],'PhARO (ours)':[2.60,.39]},
-        'ko+zh':{'Base':[2.12,.26],'SFT-only':[3.18,.34],'PhARO (ours)':[3.88,.33]}}});
-chart('fig-pfer',{kind:'bar',ymin:0,ymax:15,step:5,groups:['Overall','en+ko','en+ja','en+zh','ja+ko','ko+zh'],
-  series:['Base','SFT-only','PhARO (ours)','ElevenLabs v3','OpenAI','Gemini'],
-  data:{Overall:{'Base':11.32,'SFT-only':10.79,'PhARO (ours)':7.60,'ElevenLabs v3':10.10,'OpenAI':10.82,'Gemini':11.52},
-        'en+ko':{'Base':13.16,'SFT-only':10.97,'PhARO (ours)':8.91,'ElevenLabs v3':10.97,'OpenAI':11.52,'Gemini':11.82},
-        'en+ja':{'Base':11.39,'SFT-only':12.53,'PhARO (ours)':10.07,'ElevenLabs v3':10.57,'OpenAI':11.63,'Gemini':11.28},
-        'en+zh':{'Base':6.64,'SFT-only':7.72,'PhARO (ours)':7.80,'ElevenLabs v3':9.07,'OpenAI':8.27,'Gemini':7.86},
-        'ja+ko':{'Base':9.77,'SFT-only':10.60,'PhARO (ours)':8.03,'ElevenLabs v3':8.95,'OpenAI':12.29,'Gemini':12.29},
-        'ko+zh':{'Base':14.46,'SFT-only':11.76,'PhARO (ours)':9.59,'ElevenLabs v3':10.55,'OpenAI':10.67,'Gemini':14.18}}});
 
 fetch("manifest.json").then(r=>r.json()).then(m=>{
   M=m;
