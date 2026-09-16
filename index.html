@@ -80,6 +80,7 @@
   .na{color:#c2c7cf; font-size:12px;}
 
   /* ---- evaluation charts ---- */
+  .intro{max-width:820px; margin:0 auto 18px; font-size:14.5px; color:#2b2f37; text-align:center;}
   .charts{display:flex; flex-wrap:wrap; gap:28px; justify-content:center; align-items:flex-start;}
   .fig{flex:1 1 440px; max-width:600px; border:1px solid var(--line); border-radius:12px; padding:16px 18px 12px; background:#fff;}
   .fig h3{font-size:15px; margin:0 0 2px;}
@@ -137,10 +138,14 @@
 
   <section id="eval">
     <h2>Evaluation</h2>
+    <p class="intro">Automatic metrics can only show that the reward went down, so we also ran a blind listening test.
+      MOS (Mean Opinion Score) is the standard subjective TTS measure: listeners hear a clip and rate it from 1 (bad) to 5 (excellent).
+      We collected two separate MOS scales, <b>naturalness</b> and <b>pronunciation correctness</b>, from 14 listeners fluent in both
+      languages of each pair, plus a forced ranking of the three systems on every item.</p>
     <div class="charts">
       <div class="fig">
         <h3>Human evaluation on CSEAL</h3>
-        <p class="cap">Mean Opinion Score: 14 bilingual/trilingual listeners rated each clip from 1 to 5, blind and in random order, separately for naturalness and pronunciation correctness (720 ratings). Mean ± 95% CI, higher is better.</p>
+        <p class="cap">720 ratings, blind and in random order. Mean ± 95% CI, higher is better.</p>
         <div id="fig-mos"></div>
       </div>
       <div class="fig">
