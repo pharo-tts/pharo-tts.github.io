@@ -81,8 +81,9 @@
 
   /* ---- evaluation charts ---- */
   .intro{max-width:820px; margin:0 auto 18px; font-size:14.5px; color:#2b2f37; text-align:center;}
-  .charts{display:flex; flex-wrap:wrap; gap:28px; justify-content:center; align-items:flex-start;}
-  .fig{flex:1 1 440px; max-width:600px; border:1px solid var(--line); border-radius:12px; padding:16px 18px 12px; background:#fff;}
+  .charts{columns:2; column-gap:28px; max-width:1180px; margin:0 auto;}
+  @media (max-width:900px){ .charts{columns:1;} }
+  .fig{break-inside:avoid; margin-bottom:28px; border:1px solid var(--line); border-radius:12px; padding:16px 18px 12px; background:#fff;}
   .fig h3{font-size:15px; margin:0 0 2px;}
   .fig .cap{font-size:12.5px; color:var(--mut); margin:0 0 10px;}
   .fig svg{width:100%; height:auto; display:block; font-family:inherit;}
@@ -150,6 +151,11 @@
         <div class="two"><div><h4>Naturalness</h4><div id="fig-nat"></div></div><div><h4>Pronunciation</h4><div id="fig-pron"></div></div></div>
       </div>
       <div class="fig">
+        <h3>Lowest pronunciation error of all systems</h3>
+        <p class="cap">PFER on the CSEAL test set by language pair, in %, lower is better. Hover a bar for its value.</p>
+        <div id="fig-pfer"></div>
+      </div>
+      <div class="fig">
         <h3>Listeners prefer PhARO</h3>
         <p class="cap">Share of head-to-head comparisons won, from the forced rankings.</p>
         <div id="fig-pref"></div>
@@ -159,11 +165,6 @@
         <h3>Pronunciation score by language pair</h3>
         <p class="cap">Pronunciation MOS, 1–5, higher is better. en+ja has only 10 items per system, so treat it as tentative.</p>
         <div id="fig-pair"></div>
-      </div>
-      <div class="fig">
-        <h3>Lowest pronunciation error of all systems</h3>
-        <p class="cap">PFER on the CSEAL test set, in %, lower is better. Automatic metric used as the training reward.</p>
-        <div id="fig-pfer"></div>
       </div>
     </div>
   </section>
@@ -313,8 +314,24 @@ hbars('fig-pron',bars([2.80,3.57,3.99],[.15,.17,.15]), {min:1,max:5});
 const PAIR={'en+ko':[[2.67,3.88,4.36],[.19,.19,.16]],'en+ja':[[2.00,1.80,1.80],[.72,.70,.64]],'en+zh':[[4.47,4.65,4.72],[.17,.26,.16]],
             'ja+ko':[[2.53,2.30,2.60],[.36,.41,.39]],'ko+zh':[[2.12,3.18,3.88],[.26,.34,.33]]};
 hbars('fig-pair', Object.entries(PAIR).flatMap(([p,[v,c]])=>[{head:p},...bars(v,c)]), {min:1,max:5});
-hbars('fig-pfer', [['PhARO (ours)',7.60],['ElevenLabs v3',10.10],['SFT-only',10.79],['OpenAI',10.82],['Base',11.32],['Gemini',11.52]]
-  .map(([label,v])=>({label,v})), {min:0,max:13});
+// grouped vertical bars: PhARO orange, other systems in greys (legend + hover give the names)
+const PCOL={'Base':'#d0d5dc','SFT-only':'#a3acb8','PhARO (ours)':OURS,'ElevenLabs v3':'#7d8fa3','OpenAI':'#58697c','Gemini':'#354456'};
+(function(){
+  const groups=['Overall','en+ko','en+ja','en+zh','ja+ko','ko+zh'], series=Object.keys(PCOL);
+  const data={Overall:[11.32,10.79,7.60,10.10,10.82,11.52],'en+ko':[13.16,10.97,8.91,10.97,11.52,11.82],'en+ja':[11.39,12.53,10.07,10.57,11.63,11.28],
+              'en+zh':[6.64,7.72,7.80,9.07,8.27,7.86],'ja+ko':[9.77,10.60,8.03,8.95,12.29,12.29],'ko+zh':[14.46,11.76,9.59,10.55,10.67,14.18]};
+  const W=560,H=250,L=30,R=6,T=8,B=26,pw=W-L-R,ph=H-T-B,ymax=15, y=v=>T+ph*(1-v/ymax), gw=pw/groups.length, bw=(gw-14)/series.length;
+  let o='';
+  for(let v=0;v<=ymax;v+=5) o+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="tick" x="${L-5}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
+  groups.forEach((g,gi)=>{
+    const x0=L+gw*gi+7;
+    o+=`<text class="gl" x="${L+gw*(gi+.5)}" y="${H-7}" text-anchor="middle">${g}</text>`;
+    series.forEach((sn,si)=>{const v=data[g][si];
+      o+=`<rect x="${x0+bw*si+1}" y="${y(v)}" width="${bw-2}" height="${y(0)-y(v)}" rx="2" fill="${PCOL[sn]}" data-tip="${g} · ${sn}: ${v.toFixed(2)}"/>`;});
+  });
+  $("fig-pfer").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img">${o}</svg>`+
+    `<div class="leg">${series.map(n=>`<span><i style="background:${PCOL[n]}"></i>${n.includes('ours')?'<b>'+n+'</b>':n}</span>`).join('')}</div>`;
+})();
 // preference: two 100% bars
 (function(){
   const rows=[['vs Base',68],['vs SFT-only',60]], W=560,L=110,R=8,bh=26;
