@@ -138,8 +138,7 @@
 
   <section id="eval">
     <h2>Evaluation</h2>
-    <p class="intro">Automatic metrics can only show that the reward went down, so we also ran a blind listening test.
-      MOS (Mean Opinion Score) is the standard subjective TTS measure: listeners hear a clip and rate it from 1 (bad) to 5 (excellent).
+    <p class="intro">MOS (Mean Opinion Score) is the standard subjective TTS measure: listeners hear a clip and rate it from 1 (bad) to 5 (excellent).
       We collected two separate MOS scales, <b>naturalness</b> and <b>pronunciation correctness</b>, from 14 listeners fluent in both
       languages of each pair, plus a forced ranking of the three systems on every item.</p>
     <div class="charts">
@@ -147,6 +146,11 @@
         <h3>Human evaluation on CSEAL</h3>
         <p class="cap">720 ratings, blind and in random order. Mean ± 95% CI, higher is better.</p>
         <div id="fig-mos"></div>
+      </div>
+      <div class="fig">
+        <h3>Pronunciation MOS by language pair</h3>
+        <p class="cap">Items per system: en+ko 112 · en+ja 10 · en+zh 40 · ja+ko 30 · ko+zh 50. Mean ± 95% CI; en+ja is too small to conclude from.</p>
+        <div id="fig-mos-pair"></div>
       </div>
       <div class="fig">
         <h3>PFER on CSEAL by language pair</h3>
@@ -287,7 +291,7 @@ const legend=series=>`<div class="leg">${series.map(n=>`<span><i style="backgrou
 // grouped chart: kind 'dot' (mean+CI) or 'bar'; data[group][series] = value or [value,ci]
 function chart(el,{groups,series,data,ymin,ymax,step,kind}){
   const W=560,H=260,L=36,R=8,T=10,B=28,pw=W-L-R,ph=H-T-B;
-  const y=v=>T+ph*(1-(v-ymin)/(ymax-ymin)), gw=pw/groups.length, bw=kind==='dot'?48:Math.min(22,(gw-12)/series.length);
+  const y=v=>T+ph*(1-(v-ymin)/(ymax-ymin)), gw=pw/groups.length, bw=kind==='dot'?Math.min(48,(gw-8)/series.length):Math.min(22,(gw-12)/series.length);
   let o=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
   for(let v=ymin;v<=ymax+1e-9;v+=step) o+=`<line class="ax" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="tick" x="${L-6}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
   groups.forEach((g,gi)=>{
@@ -323,6 +327,12 @@ function chart(el,{groups,series,data,ymin,ymax,step,kind}){
 chart('fig-mos',{kind:'dot',ymin:1,ymax:5,step:1,groups:['Naturalness MOS','Pronunciation MOS'],series:['Base','SFT-only','PhARO (ours)'],
   data:{'Naturalness MOS':{'Base':[3.30,.15],'SFT-only':[3.37,.15],'PhARO (ours)':[3.35,.14]},
         'Pronunciation MOS':{'Base':[2.80,.15],'SFT-only':[3.57,.17],'PhARO (ours)':[3.99,.15]}}});
+chart('fig-mos-pair',{kind:'dot',ymin:1,ymax:5,step:1,groups:['en+ko','en+ja','en+zh','ja+ko','ko+zh'],series:['Base','SFT-only','PhARO (ours)'],
+  data:{'en+ko':{'Base':[2.67,.19],'SFT-only':[3.88,.19],'PhARO (ours)':[4.36,.16]},
+        'en+ja':{'Base':[2.00,.72],'SFT-only':[1.80,.70],'PhARO (ours)':[1.80,.64]},
+        'en+zh':{'Base':[4.47,.17],'SFT-only':[4.65,.26],'PhARO (ours)':[4.72,.16]},
+        'ja+ko':{'Base':[2.53,.36],'SFT-only':[2.30,.41],'PhARO (ours)':[2.60,.39]},
+        'ko+zh':{'Base':[2.12,.26],'SFT-only':[3.18,.34],'PhARO (ours)':[3.88,.33]}}});
 chart('fig-pfer',{kind:'bar',ymin:0,ymax:15,step:5,groups:['Overall','en+ko','en+ja','en+zh','ja+ko','ko+zh'],
   series:['Base','SFT-only','PhARO (ours)','ElevenLabs v3','OpenAI','Gemini'],
   data:{Overall:{'Base':11.32,'SFT-only':10.79,'PhARO (ours)':7.60,'ElevenLabs v3':10.10,'OpenAI':10.82,'Gemini':11.52},
