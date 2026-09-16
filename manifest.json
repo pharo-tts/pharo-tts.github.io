@@ -1,0 +1,1648 @@
+{
+ "datasets": [
+  {
+   "key": "cseal",
+   "title": "CSEAL",
+   "subtitle": "Korean · Chinese · Japanese · English code-switching",
+   "desc": "Each sentence mixes a matrix language with embedded foreign / borrowed words. These examples are chosen so that PhARO pronounces every part of the sentence — both the embedded foreign word and the surrounding matrix language — at least as accurately as (and usually better than) all three commercial systems, checked segment-by-segment rather than only on the whole-utterance average (PFER; lower is better).",
+   "metric": "PFER",
+   "metric_note": "articulatory-feature edit distance to the target pronunciation; lower is better",
+   "systems": [
+    {
+     "key": "base",
+     "label": "Base",
+     "group": "Proposed system & ablations"
+    },
+    {
+     "key": "sft",
+     "label": "+ SFT",
+     "group": "Proposed system & ablations"
+    },
+    {
+     "key": "sftgrpo",
+     "label": "+ PhARO (ours)",
+     "group": "Proposed system & ablations",
+     "ours": true
+    },
+    {
+     "key": "elevenlabs",
+     "label": "ElevenLabs v3",
+     "group": "Commercial systems",
+     "commercial": true
+    },
+    {
+     "key": "openai",
+     "label": "OpenAI",
+     "group": "Commercial systems",
+     "commercial": true
+    },
+    {
+     "key": "gemini",
+     "label": "Gemini",
+     "group": "Commercial systems",
+     "commercial": true
+    }
+   ],
+   "items": [
+    {
+     "id": "test_034_en+ko",
+     "tag": "en+ko",
+     "text": "프로젝트 마감이 가까워서 we should prioritize the key features first.",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_034_en+ko__base.mp3",
+       "m": 0.121
+      },
+      "sft": {
+       "file": "audio/cseal/test_034_en+ko__sft.mp3",
+       "m": 0.077
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_034_en+ko__sftgrpo.mp3",
+       "m": 0.042
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_034_en+ko__elevenlabs.mp3",
+       "m": 0.091
+      },
+      "openai": {
+       "file": "audio/cseal/test_034_en+ko__openai.mp3",
+       "m": 0.256
+      },
+      "gemini": {
+       "file": "audio/cseal/test_034_en+ko__gemini.mp3",
+       "m": 0.09
+      }
+     }
+    },
+    {
+     "id": "test_044_en+ko",
+     "tag": "en+ko",
+     "text": "내일 오전엔 자료 준비할게, can you review the draft afterward?",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_044_en+ko__base.mp3",
+       "m": 0.28
+      },
+      "sft": {
+       "file": "audio/cseal/test_044_en+ko__sft.mp3",
+       "m": 0.154
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_044_en+ko__sftgrpo.mp3",
+       "m": 0.13
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_044_en+ko__elevenlabs.mp3",
+       "m": 0.17
+      },
+      "openai": {
+       "file": "audio/cseal/test_044_en+ko__openai.mp3",
+       "m": 0.207
+      },
+      "gemini": {
+       "file": "audio/cseal/test_044_en+ko__gemini.mp3",
+       "m": 0.133
+      }
+     }
+    },
+    {
+     "id": "test_018_en+ko",
+     "tag": "en+ko",
+     "text": "연구 대상은 Mars입니다.",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_018_en+ko__base.mp3",
+       "m": 0.089
+      },
+      "sft": {
+       "file": "audio/cseal/test_018_en+ko__sft.mp3",
+       "m": 0.034
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_018_en+ko__sftgrpo.mp3",
+       "m": 0.029
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_018_en+ko__elevenlabs.mp3",
+       "m": 0.144
+      },
+      "openai": {
+       "file": "audio/cseal/test_018_en+ko__openai.mp3",
+       "m": 0.084
+      },
+      "gemini": {
+       "file": "audio/cseal/test_018_en+ko__gemini.mp3",
+       "m": 0.101
+      }
+     }
+    },
+    {
+     "id": "test_011_en+ja",
+     "tag": "en+ja",
+     "text": "This jacket fits well, 色違いも試してみたい",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_011_en+ja__base.mp3",
+       "m": 0.101
+      },
+      "sft": {
+       "file": "audio/cseal/test_011_en+ja__sft.mp3",
+       "m": 0.101
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_011_en+ja__sftgrpo.mp3",
+       "m": 0.007
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_011_en+ja__elevenlabs.mp3",
+       "m": 0.104
+      },
+      "openai": {
+       "file": "audio/cseal/test_011_en+ja__openai.mp3",
+       "m": 0.081
+      },
+      "gemini": {
+       "file": "audio/cseal/test_011_en+ja__gemini.mp3",
+       "m": 0.142
+      }
+     }
+    },
+    {
+     "id": "test_012_en+ja",
+     "tag": "en+ja",
+     "text": "In English, the passive voice is confusingけど、例を見ればわかるよ。",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_012_en+ja__base.mp3",
+       "m": 0.1
+      },
+      "sft": {
+       "file": "audio/cseal/test_012_en+ja__sft.mp3",
+       "m": 0.076
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_012_en+ja__sftgrpo.mp3",
+       "m": 0.063
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_012_en+ja__elevenlabs.mp3",
+       "m": 0.08
+      },
+      "openai": {
+       "file": "audio/cseal/test_012_en+ja__openai.mp3",
+       "m": 0.074
+      },
+      "gemini": {
+       "file": "audio/cseal/test_012_en+ja__gemini.mp3",
+       "m": 0.091
+      }
+     }
+    },
+    {
+     "id": "test_043_en+zh",
+     "tag": "en+zh",
+     "text": "早上好, I'm grabbing coffee before the team meeting to wake up.",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_043_en+zh__base.mp3",
+       "m": 0.096
+      },
+      "sft": {
+       "file": "audio/cseal/test_043_en+zh__sft.mp3",
+       "m": 0.101
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_043_en+zh__sftgrpo.mp3",
+       "m": 0.065
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_043_en+zh__elevenlabs.mp3",
+       "m": 0.089
+      },
+      "openai": {
+       "file": "audio/cseal/test_043_en+zh__openai.mp3",
+       "m": 0.108
+      },
+      "gemini": {
+       "file": "audio/cseal/test_043_en+zh__gemini.mp3",
+       "m": 0.101
+      }
+     }
+    },
+    {
+     "id": "test_027_en+zh",
+     "tag": "en+zh",
+     "text": "昨晚电影很感人, I couldn't stop crying during the last scene.",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_027_en+zh__base.mp3",
+       "m": 0.118
+      },
+      "sft": {
+       "file": "audio/cseal/test_027_en+zh__sft.mp3",
+       "m": 0.078
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_027_en+zh__sftgrpo.mp3",
+       "m": 0.077
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_027_en+zh__elevenlabs.mp3",
+       "m": 0.089
+      },
+      "openai": {
+       "file": "audio/cseal/test_027_en+zh__openai.mp3",
+       "m": 0.166
+      },
+      "gemini": {
+       "file": "audio/cseal/test_027_en+zh__gemini.mp3",
+       "m": 0.12
+      }
+     }
+    },
+    {
+     "id": "test_007_en+zh",
+     "tag": "en+zh",
+     "text": "下周出差去上海，I'll book the hotel and share the itinerary.",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_007_en+zh__base.mp3",
+       "m": 0.032
+      },
+      "sft": {
+       "file": "audio/cseal/test_007_en+zh__sft.mp3",
+       "m": 0.076
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_007_en+zh__sftgrpo.mp3",
+       "m": 0.068
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_007_en+zh__elevenlabs.mp3",
+       "m": 0.09
+      },
+      "openai": {
+       "file": "audio/cseal/test_007_en+zh__openai.mp3",
+       "m": 0.095
+      },
+      "gemini": {
+       "file": "audio/cseal/test_007_en+zh__gemini.mp3",
+       "m": 0.108
+      }
+     }
+    },
+    {
+     "id": "test_010_ja+ko",
+     "tag": "ja+ko",
+     "text": "다음 주ミーティングはオンラインにしたほうが効率的だと思う。",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_010_ja+ko__base.mp3",
+       "m": 0.074
+      },
+      "sft": {
+       "file": "audio/cseal/test_010_ja+ko__sft.mp3",
+       "m": 0.083
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_010_ja+ko__sftgrpo.mp3",
+       "m": 0.032
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_010_ja+ko__elevenlabs.mp3",
+       "m": 0.177
+      },
+      "openai": {
+       "file": "audio/cseal/test_010_ja+ko__openai.mp3",
+       "m": 0.137
+      },
+      "gemini": {
+       "file": "audio/cseal/test_010_ja+ko__gemini.mp3",
+       "m": 0.103
+      }
+     }
+    },
+    {
+     "id": "test_025_ja+ko",
+     "tag": "ja+ko",
+     "text": "久しぶりだね 요즘 잘 지냈어?",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_025_ja+ko__base.mp3",
+       "m": 0.036
+      },
+      "sft": {
+       "file": "audio/cseal/test_025_ja+ko__sft.mp3",
+       "m": 0.044
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_025_ja+ko__sftgrpo.mp3",
+       "m": 0.046
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_025_ja+ko__elevenlabs.mp3",
+       "m": 0.124
+      },
+      "openai": {
+       "file": "audio/cseal/test_025_ja+ko__openai.mp3",
+       "m": 0.175
+      },
+      "gemini": {
+       "file": "audio/cseal/test_025_ja+ko__gemini.mp3",
+       "m": 0.094
+      }
+     }
+    },
+    {
+     "id": "test_003_ja+ko",
+     "tag": "ja+ko",
+     "text": "그 표현은 상황에 따라意味が変わることがあるから、注意してね。",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_003_ja+ko__base.mp3",
+       "m": 0.037
+      },
+      "sft": {
+       "file": "audio/cseal/test_003_ja+ko__sft.mp3",
+       "m": 0.041
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_003_ja+ko__sftgrpo.mp3",
+       "m": 0.037
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_003_ja+ko__elevenlabs.mp3",
+       "m": 0.071
+      },
+      "openai": {
+       "file": "audio/cseal/test_003_ja+ko__openai.mp3",
+       "m": 0.17
+      },
+      "gemini": {
+       "file": "audio/cseal/test_003_ja+ko__gemini.mp3",
+       "m": 0.088
+      }
+     }
+    },
+    {
+     "id": "test_011_ko+zh",
+     "tag": "ko+zh",
+     "text": "점심 메뉴는 중식으로 할래? 我推荐那家川菜馆很不错.",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_011_ko+zh__base.mp3",
+       "m": 0.214
+      },
+      "sft": {
+       "file": "audio/cseal/test_011_ko+zh__sft.mp3",
+       "m": 0.192
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_011_ko+zh__sftgrpo.mp3",
+       "m": 0.034
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_011_ko+zh__elevenlabs.mp3",
+       "m": 0.162
+      },
+      "openai": {
+       "file": "audio/cseal/test_011_ko+zh__openai.mp3",
+       "m": 0.113
+      },
+      "gemini": {
+       "file": "audio/cseal/test_011_ko+zh__gemini.mp3",
+       "m": 0.096
+      }
+     }
+    },
+    {
+     "id": "test_005_ko+zh",
+     "tag": "ko+zh",
+     "text": "집에 가는 길에 꽃집이 있길래 我买了一束送给妈妈，妈妈很高兴。",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_005_ko+zh__base.mp3",
+       "m": 0.095
+      },
+      "sft": {
+       "file": "audio/cseal/test_005_ko+zh__sft.mp3",
+       "m": 0.094
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_005_ko+zh__sftgrpo.mp3",
+       "m": 0.06
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_005_ko+zh__elevenlabs.mp3",
+       "m": 0.173
+      },
+      "openai": {
+       "file": "audio/cseal/test_005_ko+zh__openai.mp3",
+       "m": 0.098
+      },
+      "gemini": {
+       "file": "audio/cseal/test_005_ko+zh__gemini.mp3",
+       "m": 0.132
+      }
+     }
+    },
+    {
+     "id": "test_041_ko+zh",
+     "tag": "ko+zh",
+     "text": "요즘工作让人有点累, 그래서 주말에는 푹 쉬려고 해요.",
+     "clips": {
+      "base": {
+       "file": "audio/cseal/test_041_ko+zh__base.mp3",
+       "m": 0.149
+      },
+      "sft": {
+       "file": "audio/cseal/test_041_ko+zh__sft.mp3",
+       "m": 0.1
+      },
+      "sftgrpo": {
+       "file": "audio/cseal/test_041_ko+zh__sftgrpo.mp3",
+       "m": 0.043
+      },
+      "elevenlabs": {
+       "file": "audio/cseal/test_041_ko+zh__elevenlabs.mp3",
+       "m": 0.177
+      },
+      "openai": {
+       "file": "audio/cseal/test_041_ko+zh__openai.mp3",
+       "m": 0.165
+      },
+      "gemini": {
+       "file": "audio/cseal/test_041_ko+zh__gemini.mp3",
+       "m": 0.182
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "hike",
+   "title": "HiKE",
+   "subtitle": "Korean–English code-switching",
+   "desc": "PhARO preserves the English pronunciation of embedded English terms; commercial systems (English default voices) tend to nativize or mangle them. Ground-truth human speech is shown as reference.",
+   "metric": "PFER",
+   "metric_note": "articulatory-feature edit distance to the target pronunciation; lower is better",
+   "nowin": false,
+   "systems": [
+    {
+     "key": "gt",
+     "label": "Ground truth",
+     "group": "Reference",
+     "gt": true
+    },
+    {
+     "key": "base",
+     "label": "Base",
+     "group": "Proposed system & ablations"
+    },
+    {
+     "key": "sft",
+     "label": "+ SFT",
+     "group": "Proposed system & ablations"
+    },
+    {
+     "key": "ours",
+     "label": "+ PhARO (ours)",
+     "group": "Proposed system & ablations",
+     "ours": true
+    },
+    {
+     "key": "elevenlabs",
+     "label": "ElevenLabs v3",
+     "group": "Commercial systems",
+     "commercial": true
+    },
+    {
+     "key": "openai",
+     "label": "OpenAI",
+     "group": "Commercial systems",
+     "commercial": true
+    },
+    {
+     "key": "gemini",
+     "label": "Gemini",
+     "group": "Commercial systems",
+     "commercial": true
+    }
+   ],
+   "items": [
+    {
+     "id": "hike_0720",
+     "tag": "ko+en",
+     "text": "patient chart 확인하고 medication 처방하겠습니다.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0720__gt.mp3",
+       "m": 0.13
+      },
+      "base": {
+       "file": "audio/hike/hike_0720__base.mp3",
+       "m": 0.113
+      },
+      "sft": {
+       "file": "audio/hike/hike_0720__sft.mp3",
+       "m": 0.116
+      },
+      "ours": {
+       "file": "audio/hike/hike_0720__ours.mp3",
+       "m": 0.076
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0720__elevenlabs.mp3",
+       "m": 0.176
+      },
+      "openai": {
+       "file": "audio/hike/hike_0720__openai.mp3",
+       "m": 0.279
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0720__gemini.mp3",
+       "m": 0.155
+      }
+     }
+    },
+    {
+     "id": "hike_0157",
+     "tag": "ko+en",
+     "text": "frontend에서는 responsive design framework를 적용해서 mobile optimization 작업을 진행하고 있어.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0157__gt.mp3",
+       "m": 0.117
+      },
+      "base": {
+       "file": "audio/hike/hike_0157__base.mp3",
+       "m": 0.152
+      },
+      "sft": {
+       "file": "audio/hike/hike_0157__sft.mp3",
+       "m": 0.085
+      },
+      "ours": {
+       "file": "audio/hike/hike_0157__ours.mp3",
+       "m": 0.085
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0157__elevenlabs.mp3",
+       "m": 0.172
+      },
+      "openai": {
+       "file": "audio/hike/hike_0157__openai.mp3",
+       "m": 0.259
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0157__gemini.mp3",
+       "m": 0.162
+      }
+     }
+    },
+    {
+     "id": "hike_0473",
+     "tag": "ko+en",
+     "text": "Marketing 팀은 brand consistency를 유지하면서 campaign을 진행해야 돼.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0473__gt.mp3",
+       "m": 0.156
+      },
+      "base": {
+       "file": "audio/hike/hike_0473__base.mp3",
+       "m": 0.215
+      },
+      "sft": {
+       "file": "audio/hike/hike_0473__sft.mp3",
+       "m": 0.143
+      },
+      "ours": {
+       "file": "audio/hike/hike_0473__ours.mp3",
+       "m": 0.089
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0473__elevenlabs.mp3",
+       "m": 0.163
+      },
+      "openai": {
+       "file": "audio/hike/hike_0473__openai.mp3",
+       "m": 0.16
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0473__gemini.mp3",
+       "m": 0.161
+      }
+     }
+    },
+    {
+     "id": "hike_0003",
+     "tag": "ko+en",
+     "text": "이번 sprint에서 API gateway migration 작업이 생각보다 complex해서 deadline을 못 맞출 것 같아.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0003__gt.mp3",
+       "m": 0.183
+      },
+      "base": {
+       "file": "audio/hike/hike_0003__base.mp3",
+       "m": 0.146
+      },
+      "sft": {
+       "file": "audio/hike/hike_0003__sft.mp3",
+       "m": 0.144
+      },
+      "ours": {
+       "file": "audio/hike/hike_0003__ours.mp3",
+       "m": 0.075
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0003__elevenlabs.mp3",
+       "m": 0.173
+      },
+      "openai": {
+       "file": "audio/hike/hike_0003__openai.mp3",
+       "m": 0.266
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0003__gemini.mp3",
+       "m": 0.146
+      }
+     }
+    },
+    {
+     "id": "hike_0524",
+     "tag": "ko+en",
+     "text": "competitive market analysis를 바탕으로 전략을 수정해야 돼.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0524__gt.mp3",
+       "m": 0.182
+      },
+      "base": {
+       "file": "audio/hike/hike_0524__base.mp3",
+       "m": 0.162
+      },
+      "sft": {
+       "file": "audio/hike/hike_0524__sft.mp3",
+       "m": 0.175
+      },
+      "ours": {
+       "file": "audio/hike/hike_0524__ours.mp3",
+       "m": 0.114
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0524__elevenlabs.mp3",
+       "m": 0.185
+      },
+      "openai": {
+       "file": "audio/hike/hike_0524__openai.mp3",
+       "m": 0.186
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0524__gemini.mp3",
+       "m": 0.179
+      }
+     }
+    },
+    {
+     "id": "hike_0073",
+     "tag": "ko+en",
+     "text": "database backup 안 해놨는데 server가 crash 났어.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0073__gt.mp3",
+       "m": 0.231
+      },
+      "base": {
+       "file": "audio/hike/hike_0073__base.mp3",
+       "m": 0.126
+      },
+      "sft": {
+       "file": "audio/hike/hike_0073__sft.mp3",
+       "m": 0.102
+      },
+      "ours": {
+       "file": "audio/hike/hike_0073__ours.mp3",
+       "m": 0.086
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0073__elevenlabs.mp3",
+       "m": 0.147
+      },
+      "openai": {
+       "file": "audio/hike/hike_0073__openai.mp3",
+       "m": 0.148
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0073__gemini.mp3",
+       "m": 0.191
+      }
+     }
+    },
+    {
+     "id": "hike_0929",
+     "tag": "ko+en",
+     "text": "세포 사멸 유발 기전을 조사하기 위해 caspase 활성 측정 실험을 수행하였다.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0929__gt.mp3",
+       "m": 0.178
+      },
+      "base": {
+       "file": "audio/hike/hike_0929__base.mp3",
+       "m": 0.106
+      },
+      "sft": {
+       "file": "audio/hike/hike_0929__sft.mp3",
+       "m": 0.124
+      },
+      "ours": {
+       "file": "audio/hike/hike_0929__ours.mp3",
+       "m": 0.075
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0929__elevenlabs.mp3",
+       "m": 0.131
+      },
+      "openai": {
+       "file": "audio/hike/hike_0929__openai.mp3",
+       "m": 0.131
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0929__gemini.mp3",
+       "m": 0.133
+      }
+     }
+    },
+    {
+     "id": "hike_0373",
+     "tag": "ko+en",
+     "text": "milestone 변경되면 timeline 새로 update해야 해.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0373__gt.mp3",
+       "m": 0.174
+      },
+      "base": {
+       "file": "audio/hike/hike_0373__base.mp3",
+       "m": 0.133
+      },
+      "sft": {
+       "file": "audio/hike/hike_0373__sft.mp3",
+       "m": 0.118
+      },
+      "ours": {
+       "file": "audio/hike/hike_0373__ours.mp3",
+       "m": 0.063
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0373__elevenlabs.mp3",
+       "m": 0.123
+      },
+      "openai": {
+       "file": "audio/hike/hike_0373__openai.mp3",
+       "m": 0.138
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0373__gemini.mp3",
+       "m": 0.116
+      }
+     }
+    },
+    {
+     "id": "hike_0225",
+     "tag": "ko+en",
+     "text": "우리 repository 좀 정리하자, 너무 더러워.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0225__gt.mp3",
+       "m": 0.182
+      },
+      "base": {
+       "file": "audio/hike/hike_0225__base.mp3",
+       "m": 0.126
+      },
+      "sft": {
+       "file": "audio/hike/hike_0225__sft.mp3",
+       "m": 0.127
+      },
+      "ours": {
+       "file": "audio/hike/hike_0225__ours.mp3",
+       "m": 0.104
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0225__elevenlabs.mp3",
+       "m": 0.155
+      },
+      "openai": {
+       "file": "audio/hike/hike_0225__openai.mp3",
+       "m": 0.19
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0225__gemini.mp3",
+       "m": 0.208
+      }
+     }
+    },
+    {
+     "id": "hike_0931",
+     "tag": "ko+en",
+     "text": "단백질 구조 변화를 정량적으로 분석하기 위해 mass spectrometry 기법을 이용하여 분자량 측정을 실시하였다.",
+     "clips": {
+      "gt": {
+       "file": "audio/hike/hike_0931__gt.mp3",
+       "m": 0.167
+      },
+      "base": {
+       "file": "audio/hike/hike_0931__base.mp3",
+       "m": 0.119
+      },
+      "sft": {
+       "file": "audio/hike/hike_0931__sft.mp3",
+       "m": 0.117
+      },
+      "ours": {
+       "file": "audio/hike/hike_0931__ours.mp3",
+       "m": 0.076
+      },
+      "elevenlabs": {
+       "file": "audio/hike/hike_0931__elevenlabs.mp3",
+       "m": 0.133
+      },
+      "openai": {
+       "file": "audio/hike/hike_0931__openai.mp3",
+       "m": 0.152
+      },
+      "gemini": {
+       "file": "audio/hike/hike_0931__gemini.mp3",
+       "m": 0.127
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "ascend",
+   "title": "ASCEND",
+   "subtitle": "Mandarin–English spontaneous code-switching",
+   "desc": "Commercial systems frequently mispronounce the embedded English words; PhARO renders them faithfully. Ground-truth human speech is shown as reference.",
+   "metric": "PFER",
+   "metric_note": "articulatory-feature edit distance to the target pronunciation; lower is better",
+   "nowin": false,
+   "systems": [
+    {
+     "key": "gt",
+     "label": "Ground truth",
+     "group": "Reference",
+     "gt": true
+    },
+    {
+     "key": "base",
+     "label": "Base",
+     "group": "Proposed system & ablations"
+    },
+    {
+     "key": "sft",
+     "label": "+ SFT",
+     "group": "Proposed system & ablations"
+    },
+    {
+     "key": "ours",
+     "label": "+ PhARO (ours)",
+     "group": "Proposed system & ablations",
+     "ours": true
+    },
+    {
+     "key": "elevenlabs",
+     "label": "ElevenLabs v3",
+     "group": "Commercial systems",
+     "commercial": true
+    },
+    {
+     "key": "openai",
+     "label": "OpenAI",
+     "group": "Commercial systems",
+     "commercial": true
+    },
+    {
+     "key": "gemini",
+     "label": "Gemini",
+     "group": "Commercial systems",
+     "commercial": true
+    }
+   ],
+   "items": [
+    {
+     "id": "00337",
+     "tag": "zh+en",
+     "text": "就是user去回去respond一些就是interesting的",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00337__gt.mp3",
+       "m": 0.123
+      },
+      "base": {
+       "file": "audio/ascend/00337__base.mp3",
+       "m": 0.093
+      },
+      "sft": {
+       "file": "audio/ascend/00337__sft.mp3",
+       "m": 0.084
+      },
+      "ours": {
+       "file": "audio/ascend/00337__ours.mp3",
+       "m": 0.07
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00337__elevenlabs.mp3",
+       "m": 0.171
+      },
+      "openai": {
+       "file": "audio/ascend/00337__openai.mp3",
+       "m": 0.168
+      },
+      "gemini": {
+       "file": "audio/ascend/00337__gemini.mp3",
+       "m": 0.177
+      }
+     }
+    },
+    {
+     "id": "00683",
+     "tag": "zh+en",
+     "text": "在elementary school的时候就我当时",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00683__gt.mp3",
+       "m": 0.146
+      },
+      "base": {
+       "file": "audio/ascend/00683__base.mp3",
+       "m": 0.044
+      },
+      "sft": {
+       "file": "audio/ascend/00683__sft.mp3",
+       "m": 0.016
+      },
+      "ours": {
+       "file": "audio/ascend/00683__ours.mp3",
+       "m": 0.012
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00683__elevenlabs.mp3",
+       "m": 0.087
+      },
+      "openai": {
+       "file": "audio/ascend/00683__openai.mp3",
+       "m": 0.136
+      },
+      "gemini": {
+       "file": "audio/ascend/00683__gemini.mp3",
+       "m": 0.083
+      }
+     }
+    },
+    {
+     "id": "00687",
+     "tag": "zh+en",
+     "text": "就是我可以就是swim properly",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00687__gt.mp3",
+       "m": 0.109
+      },
+      "base": {
+       "file": "audio/ascend/00687__base.mp3",
+       "m": 0.049
+      },
+      "sft": {
+       "file": "audio/ascend/00687__sft.mp3",
+       "m": 0.047
+      },
+      "ours": {
+       "file": "audio/ascend/00687__ours.mp3",
+       "m": 0.007
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00687__elevenlabs.mp3",
+       "m": 0.194
+      },
+      "openai": {
+       "file": "audio/ascend/00687__openai.mp3",
+       "m": 0.179
+      },
+      "gemini": {
+       "file": "audio/ascend/00687__gemini.mp3",
+       "m": 0.075
+      }
+     }
+    },
+    {
+     "id": "00812",
+     "tag": "zh+en",
+     "text": "yeah我现在觉得哦我觉得compare to um",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00812__gt.mp3",
+       "m": 0.484
+      },
+      "base": {
+       "file": "audio/ascend/00812__base.mp3",
+       "m": 0.099
+      },
+      "sft": {
+       "file": "audio/ascend/00812__sft.mp3",
+       "m": 0.097
+      },
+      "ours": {
+       "file": "audio/ascend/00812__ours.mp3",
+       "m": 0.067
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00812__elevenlabs.mp3",
+       "m": 0.16
+      },
+      "openai": {
+       "file": "audio/ascend/00812__openai.mp3",
+       "m": 0.162
+      },
+      "gemini": {
+       "file": "audio/ascend/00812__gemini.mp3",
+       "m": 0.127
+      }
+     }
+    },
+    {
+     "id": "00225",
+     "tag": "zh+en",
+     "text": "然后呃我也喜欢play basketball",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00225__gt.mp3",
+       "m": 0.287
+      },
+      "base": {
+       "file": "audio/ascend/00225__base.mp3",
+       "m": 0.083
+      },
+      "sft": {
+       "file": "audio/ascend/00225__sft.mp3",
+       "m": 0.054
+      },
+      "ours": {
+       "file": "audio/ascend/00225__ours.mp3",
+       "m": 0.024
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00225__elevenlabs.mp3",
+       "m": 0.126
+      },
+      "openai": {
+       "file": "audio/ascend/00225__openai.mp3",
+       "m": 0.114
+      },
+      "gemini": {
+       "file": "audio/ascend/00225__gemini.mp3",
+       "m": 0.083
+      }
+     }
+    },
+    {
+     "id": "00639",
+     "tag": "zh+en",
+     "text": "你可以邀一些你的就是female friends",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00639__gt.mp3",
+       "m": 0.149
+      },
+      "base": {
+       "file": "audio/ascend/00639__base.mp3",
+       "m": 0.149
+      },
+      "sft": {
+       "file": "audio/ascend/00639__sft.mp3",
+       "m": 0.046
+      },
+      "ours": {
+       "file": "audio/ascend/00639__ours.mp3",
+       "m": 0.02
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00639__elevenlabs.mp3",
+       "m": 0.096
+      },
+      "openai": {
+       "file": "audio/ascend/00639__openai.mp3",
+       "m": 0.067
+      },
+      "gemini": {
+       "file": "audio/ascend/00639__gemini.mp3",
+       "m": 0.111
+      }
+     }
+    },
+    {
+     "id": "00723",
+     "tag": "zh+en",
+     "text": "对他是一个就是特别有talent的一个player",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00723__gt.mp3",
+       "m": 0.26
+      },
+      "base": {
+       "file": "audio/ascend/00723__base.mp3",
+       "m": 0.053
+      },
+      "sft": {
+       "file": "audio/ascend/00723__sft.mp3",
+       "m": 0.053
+      },
+      "ours": {
+       "file": "audio/ascend/00723__ours.mp3",
+       "m": 0.03
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00723__elevenlabs.mp3",
+       "m": 0.077
+      },
+      "openai": {
+       "file": "audio/ascend/00723__openai.mp3",
+       "m": 0.11
+      },
+      "gemini": {
+       "file": "audio/ascend/00723__gemini.mp3",
+       "m": 0.143
+      }
+     }
+    },
+    {
+     "id": "00295",
+     "tag": "zh+en",
+     "text": "tell一些你现在做什么research方向",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00295__gt.mp3",
+       "m": 0.157
+      },
+      "base": {
+       "file": "audio/ascend/00295__base.mp3",
+       "m": 0.075
+      },
+      "sft": {
+       "file": "audio/ascend/00295__sft.mp3",
+       "m": 0.032
+      },
+      "ours": {
+       "file": "audio/ascend/00295__ours.mp3",
+       "m": 0.033
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00295__elevenlabs.mp3",
+       "m": 0.18
+      },
+      "openai": {
+       "file": "audio/ascend/00295__openai.mp3",
+       "m": 0.077
+      },
+      "gemini": {
+       "file": "audio/ascend/00295__gemini.mp3",
+       "m": 0.127
+      }
+     }
+    },
+    {
+     "id": "00986",
+     "tag": "zh+en",
+     "text": "因为如果你让AI去drive a car",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/00986__gt.mp3",
+       "m": 0.12
+      },
+      "base": {
+       "file": "audio/ascend/00986__base.mp3",
+       "m": 0.099
+      },
+      "sft": {
+       "file": "audio/ascend/00986__sft.mp3",
+       "m": 0.069
+      },
+      "ours": {
+       "file": "audio/ascend/00986__ours.mp3",
+       "m": 0.04
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/00986__elevenlabs.mp3",
+       "m": 0.083
+      },
+      "openai": {
+       "file": "audio/ascend/00986__openai.mp3",
+       "m": 0.107
+      },
+      "gemini": {
+       "file": "audio/ascend/00986__gemini.mp3",
+       "m": 0.111
+      }
+     }
+    },
+    {
+     "id": "01147",
+     "tag": "zh+en",
+     "text": "还有就是比如说会呃我们上次就我上次做的一个project是",
+     "clips": {
+      "gt": {
+       "file": "audio/ascend/01147__gt.mp3",
+       "m": 0.104
+      },
+      "base": {
+       "file": "audio/ascend/01147__base.mp3",
+       "m": 0.024
+      },
+      "sft": {
+       "file": "audio/ascend/01147__sft.mp3",
+       "m": 0.038
+      },
+      "ours": {
+       "file": "audio/ascend/01147__ours.mp3",
+       "m": 0.009
+      },
+      "elevenlabs": {
+       "file": "audio/ascend/01147__elevenlabs.mp3",
+       "m": 0.082
+      },
+      "openai": {
+       "file": "audio/ascend/01147__openai.mp3",
+       "m": 0.051
+      },
+      "gemini": {
+       "file": "audio/ascend/01147__gemini.mp3",
+       "m": 0.055
+      }
+     }
+    }
+   ]
+  },
+  {
+   "key": "jsut",
+   "title": "JSUT",
+   "subtitle": "Monolingual Japanese read speech",
+   "desc": "A sanity check that our code-switching fine-tuning does not degrade clean monolingual speech. On standard Japanese read speech, PhARO, its base model and the human ground-truth recordings all reach similarly low pronunciation error (PFER, the same measure used in the other datasets), while PhARO stays ahead of the commercial systems — confirming the RL objective preserves monolingual quality rather than trading it away. English-voiced commercial systems still tend to anglicize embedded loanwords (e.g. ElevenLabs renders “エンパイアステートビル” closer to English “Empire State”).",
+   "metric": "PFER",
+   "metric_note": "articulatory-feature edit distance between the spoken and target pronunciation (XEUS phone recognition vs the reference IPA); lower is better",
+   "nowin": true,
+   "systems": [
+    {
+     "key": "gt",
+     "label": "Ground truth",
+     "group": "Reference",
+     "gt": true
+    },
+    {
+     "key": "base",
+     "label": "Base",
+     "group": "Proposed system & ablations"
+    },
+    {
+     "key": "ours",
+     "label": "+ PhARO (ours)",
+     "group": "Proposed system & ablations",
+     "ours": true
+    },
+    {
+     "key": "elevenlabs",
+     "label": "ElevenLabs v3",
+     "group": "Commercial systems",
+     "commercial": true
+    },
+    {
+     "key": "openai",
+     "label": "OpenAI",
+     "group": "Commercial systems",
+     "commercial": true
+    },
+    {
+     "key": "gemini",
+     "label": "Gemini",
+     "group": "Commercial systems",
+     "commercial": true
+    }
+   ],
+   "items": [
+    {
+     "id": "BASIC5000_2372",
+     "tag": "ja",
+     "text": "エンパイアステートビルの高さは、どのくらいですか。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_2372__gt.mp3",
+       "m": 0.004
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_2372__base.mp3",
+       "m": 0.004
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_2372__ours.mp3",
+       "m": 0.004
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_2372__elevenlabs.mp3",
+       "m": 0.027
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_2372__openai.mp3",
+       "m": 0.004
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_2372__gemini.mp3",
+       "m": 0.004
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_1877",
+     "tag": "ja",
+     "text": "寂しくなった時は、いつでも、気楽に私と話しに来て下さい。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_1877__gt.mp3",
+       "m": 0.025
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_1877__base.mp3",
+       "m": 0.025
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_1877__ours.mp3",
+       "m": 0.025
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_1877__elevenlabs.mp3",
+       "m": 0.088
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_1877__openai.mp3",
+       "m": 0.041
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_1877__gemini.mp3",
+       "m": 0.026
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_1135",
+     "tag": "ja",
+     "text": "窓側か通路側、どちらになさいますか。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_1135__gt.mp3",
+       "m": 0.02
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_1135__base.mp3",
+       "m": 0.01
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_1135__ours.mp3",
+       "m": 0.011
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_1135__elevenlabs.mp3",
+       "m": 0.011
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_1135__openai.mp3",
+       "m": 0.034
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_1135__gemini.mp3",
+       "m": 0.021
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_4547",
+     "tag": "ja",
+     "text": "かっぱ寿司は、リーズナブルな回転寿司のチェーン店だ。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_4547__gt.mp3",
+       "m": 0.049
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_4547__base.mp3",
+       "m": 0.067
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_4547__ours.mp3",
+       "m": 0.069
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_4547__elevenlabs.mp3",
+       "m": 0.046
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_4547__openai.mp3",
+       "m": 0.067
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_4547__gemini.mp3",
+       "m": 0.049
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_0314",
+     "tag": "ja",
+     "text": "わが国は、エネルギー資源が不足してきた。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_0314__gt.mp3",
+       "m": 0.016
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_0314__base.mp3",
+       "m": 0.01
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_0314__ours.mp3",
+       "m": 0.01
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_0314__elevenlabs.mp3",
+       "m": 0.055
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_0314__openai.mp3",
+       "m": 0.015
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_0314__gemini.mp3",
+       "m": 0.015
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_0567",
+     "tag": "ja",
+     "text": "声を聞いて、すぐジェーンだと分かった。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_0567__gt.mp3",
+       "m": 0.105
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_0567__base.mp3",
+       "m": 0.071
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_0567__ours.mp3",
+       "m": 0.105
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_0567__elevenlabs.mp3",
+       "m": 0.039
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_0567__openai.mp3",
+       "m": 0.083
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_0567__gemini.mp3",
+       "m": 0.108
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_1727",
+     "tag": "ja",
+     "text": "総会に出席し、データ転送の新技術を知ることができました。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_1727__gt.mp3",
+       "m": 0.018
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_1727__base.mp3",
+       "m": 0.002
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_1727__ours.mp3",
+       "m": 0.018
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_1727__elevenlabs.mp3",
+       "m": 0.034
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_1727__openai.mp3",
+       "m": 0.037
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_1727__gemini.mp3",
+       "m": 0.036
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_3681",
+     "tag": "ja",
+     "text": "臨時のシェフとして、併設されているカフェで働いている。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_3681__gt.mp3",
+       "m": 0.019
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_3681__base.mp3",
+       "m": 0.019
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_3681__ours.mp3",
+       "m": 0.001
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_3681__elevenlabs.mp3",
+       "m": 0.054
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_3681__openai.mp3",
+       "m": 0.001
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_3681__gemini.mp3",
+       "m": 0.001
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_0014",
+     "tag": "ja",
+     "text": "残酷ということは、彼の性質にはないことだ。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_0014__gt.mp3",
+       "m": 0.011
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_0014__base.mp3",
+       "m": 0.011
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_0014__ours.mp3",
+       "m": 0.011
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_0014__elevenlabs.mp3",
+       "m": 0.011
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_0014__openai.mp3",
+       "m": 0.011
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_0014__gemini.mp3",
+       "m": 0.011
+      }
+     }
+    },
+    {
+     "id": "BASIC5000_2586",
+     "tag": "ja",
+     "text": "大地震の発生から、応急対策の収束までの、避難の流れです。",
+     "clips": {
+      "gt": {
+       "file": "audio/jsut/BASIC5000_2586__gt.mp3",
+       "m": 0.03
+      },
+      "base": {
+       "file": "audio/jsut/BASIC5000_2586__base.mp3",
+       "m": 0.03
+      },
+      "ours": {
+       "file": "audio/jsut/BASIC5000_2586__ours.mp3",
+       "m": 0.03
+      },
+      "elevenlabs": {
+       "file": "audio/jsut/BASIC5000_2586__elevenlabs.mp3",
+       "m": 0.047
+      },
+      "openai": {
+       "file": "audio/jsut/BASIC5000_2586__openai.mp3",
+       "m": 0.032
+      },
+      "gemini": {
+       "file": "audio/jsut/BASIC5000_2586__gemini.mp3",
+       "m": 0.03
+      }
+     }
+    }
+   ]
+  }
+ ]
+}

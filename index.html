@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhARO — Pronunciation-Accurate Code-Switching TTS · Audio Samples</title>
+<style>
+  :root{
+    --bg:#ffffff; --ink:#16181d; --mut:#5f6672; --line:#e6e8ec; --soft:#f4f6f8;
+    --ours:#0d6e4f; --oursbg:#e9f7f0; --oursln:#bfe6d5; --accent:#0d6e4f;
+    --gt:#7a5cc7; --warn:#b23b3b;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1180px; margin:0 auto; padding:34px 20px 90px;}
+  header{text-align:center; padding:10px 0 26px; border-bottom:1px solid var(--line); margin-bottom:30px;}
+  .kicker{font-size:12.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--mut); margin:0 0 14px;}
+  h1{font-size:34px; line-height:1.2; margin:0 auto 18px; letter-spacing:-.015em; max-width:900px;}
+  h1 .p{color:#ff6a00;}
+  .authors{font-size:17px; margin:0 0 4px;}
+  .affil{font-size:14.5px; color:var(--mut); margin:0 0 20px;}
+  .links{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+  .btn{display:inline-flex; align-items:center; gap:7px; background:var(--ink); color:#fff; border-radius:999px;
+    padding:9px 18px; font-size:14px; font-weight:600; text-decoration:none;}
+  .btn:hover{background:#2b2f37;}
+  .btn.soon{opacity:.45; pointer-events:none;}
+  section{margin:0 0 38px;}
+  .tabs{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:6px 0 4px;}
+  .tab{padding:7px 14px; border:1px solid var(--line); border-radius:999px; background:#fff;
+    cursor:pointer; font-size:13.5px; font-weight:600; color:var(--mut);}
+  .tab.on{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .tab:not(.on):hover{border-color:#c9ced6;}
+  .hide{display:none;}
+  section h2{font-size:22px; margin:0 0 12px; text-align:center;}
+  .abstract{max-width:820px; margin:0 auto; font-size:15.5px; color:#2b2f37; text-align:justify;}
+  .abstract b{color:var(--ink);}
+  .placeholder{background:#fbf6ea; border:1px dashed #d8c58f; color:#7a6a3f; border-radius:8px; padding:12px 16px;}
+
+
+
+
+  .gridwrap{overflow-x:auto; border:1px solid var(--line); border-radius:12px; margin-top:14px;
+    -webkit-overflow-scrolling:touch;}
+  table{border-collapse:separate; border-spacing:0; width:100%; font-size:13px;}
+  thead th{position:sticky; top:0; background:#fbfcfd; z-index:3; border-bottom:1px solid var(--line);
+    font-weight:600;}
+  .sub th, td.cell{min-width:58px;}
+  .grp th{font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--mut);
+    padding:8px 10px 4px; text-align:center; border-bottom:none;}
+  .grp th.gp-ours{color:var(--ours);}
+  .sub th{padding:2px 10px 9px; text-align:center; color:#2b2f37;}
+  .sub th.sent-h{text-align:left;}
+  th.sent-h, td.sent{position:sticky; left:0; background:#fff; z-index:2; text-align:left;
+    min-width:200px; max-width:270px; border-right:1px solid var(--line);}
+  thead th.sent-h{z-index:4; background:#fbfcfd;}
+  td{border-bottom:1px solid var(--line); padding:11px 10px; vertical-align:top; text-align:center;}
+  tbody tr:last-child td{border-bottom:none;}
+  td.sent{padding:12px 14px;}
+  .sent .tag{display:inline-block; font-size:11px; color:var(--mut); background:var(--soft);
+    border:1px solid var(--line); border-radius:5px; padding:1px 7px; margin-bottom:6px; font-variant-numeric:tabular-nums;}
+  .sent .tx{font-size:14.5px; line-height:1.5;}
+  .sent .tx b{color:var(--warn); font-weight:700;}
+  .sent .win{font-size:11.5px; color:var(--ours); margin-top:7px; font-weight:600;}
+  .sent .win .x{color:var(--mut); font-weight:500;}
+
+  td.cell .pb{width:34px; height:34px; border-radius:50%; border:1px solid var(--line); background:#fff;
+    color:var(--ink); font-size:12px; cursor:pointer; display:inline-flex; align-items:center;
+    justify-content:center; margin:0 auto 4px; padding:0; line-height:1; transition:.12s;}
+  td.cell .pb:hover{border-color:var(--accent); color:var(--accent);}
+  td.cell .pb.playing{background:var(--accent); color:#fff; border-color:var(--accent);}
+  td.ours .pb{border-color:var(--oursln);}
+  td.cell .m{font-size:11.5px; color:var(--mut); font-variant-numeric:tabular-nums;}
+  td.cell .m.best{color:var(--ours); font-weight:700;}
+  td.ours{background:var(--oursbg);}
+  thead th.ours{background:#e3f3ec;}
+  td.gtc .m{color:var(--gt);}
+  .na{color:#c2c7cf; font-size:12px;}
+
+  .foot{color:var(--mut); font-size:12.5px; margin-top:26px; border-top:1px solid var(--line); padding-top:16px;}
+  .foot b{color:var(--ink);}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="kicker">Under review · ICASSP 2027</p>
+    <h1><span class="p">PhARO</span>: Phonetic-Articulatory Reward Optimization<br>for Pronunciation-Accurate Code-Switching TTS</h1>
+    <p class="authors">Anonymous Authors</p>
+    <p class="affil">Anonymous Institution</p>
+    <div class="links">
+      <a class="btn soon" href="#">Paper</a>
+      <a class="btn soon" href="#">Code</a>
+    </div>
+  </header>
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <p class="abstract placeholder"><b>[Placeholder — replace with the paper abstract.]</b>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Text-to-speech systems frequently mispronounce
+      embedded foreign or borrowed words in code-switched input. We propose PhARO, which uses Phonetic Feature
+      Error Rate (PFER), an articulatory-feature distance between synthesized and target pronunciation, as a
+      verifiable reward for GRPO post-training. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  </section>
+
+  <section id="samples">
+    <h2>Audio Samples</h2>
+    <div class="tabs" id="tabs"></div>
+  <div id="panel"></div>
+  </section>
+
+  <p class="foot">All audio loudness-normalized to −23 LUFS.</p>
+</div>
+
+<script>
+let M=null;
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+// ---- script-run detection: bold the embedded (script-minority) letters ----
+function scriptOf(ch){
+  const c=ch.codePointAt(0);
+  if((c>=0x41&&c<=0x5a)||(c>=0x61&&c<=0x7a)||(c>=0xc0&&c<=0x24f)) return 'latin';
+  if(c>=0xac00&&c<=0xd7a3) return 'hangul';
+  if((c>=0x3040&&c<=0x30ff)) return 'kana';
+  if((c>=0x4e00&&c<=0x9fff)||(c>=0x3400&&c<=0x4dbf)) return 'han';
+  return null; // space / punct / digit
+}
+function highlight(text){
+  const chs=[...text]; let sc=chs.map(scriptOf);
+  if(sc.includes('kana')) sc=sc.map(x=>x==='han'?'kana':x); // kanji inside Japanese text is not embedded
+  const cnt={}; sc.forEach(s=>{if(s)cnt[s]=(cnt[s]||0)+1;});
+  let matrix=null,mx=-1; for(const k in cnt){if(cnt[k]>mx){mx=cnt[k];matrix=k;}}
+  // Latin mixed with CJK: the Latin (English) span is the embedded word regardless of length.
+  const cjk=Object.keys(cnt).some(k=>k!=='latin');
+  const emb=chs.map((ch,i)=> sc[i]? (cnt.latin&&cjk ? sc[i]==='latin' : sc[i]!==matrix) : null);
+  // fill non-letters: embedded if both neighbours embedded
+  for(let i=0;i<emb.length;i++){
+    if(emb[i]===null){
+      let l=i-1; while(l>=0&&emb[l]===null)l--;
+      let r=i+1; while(r<emb.length&&emb[r]===null)r++;
+      emb[i]=(l>=0&&emb[l]===true&&r<emb.length&&emb[r]===true);
+    }
+  }
+  let out='',run=false;
+  for(let i=0;i<chs.length;i++){
+    if(emb[i]&&!run){out+='<b>';run=true;}
+    else if(!emb[i]&&run){out+='</b>';run=false;}
+    out+=esc(chs[i]);
+  }
+  if(run)out+='</b>';
+  return out;
+}
+
+function commLabel(ds){ // best commercial per item handled in render
+  return ds.systems.filter(s=>s.commercial);
+}
+
+const PAIRS=['en+ko','en+ja','en+zh','ja+ko','ko+zh'];
+const pairOf=t=>{const p=(t||'').split('+').sort().join('+'); return PAIRS.find(x=>x.split('+').sort().join('+')===p)||p;};
+
+// one section per language pair; rows from every dataset, columns = union of systems (matched by label)
+function render(g){
+  const sys=g.systems;
+  const groups=[]; sys.forEach(s=>{const x=groups[groups.length-1];
+    if(x&&x.name===s.group)x.span++; else groups.push({name:s.group,span:1,ours:!!s.ours});});
+  let grpTh='<th class="sent-h" rowspan="2"><div>Utterance</div></th>';
+  groups.forEach(x=>grpTh+=`<th class="${x.ours?'gp-ours':''}" colspan="${x.span}">${esc(x.name)}</th>`);
+  let subTh=''; sys.forEach(s=>subTh+=`<th class="${s.ours?'ours':''}">${esc(s.label)}</th>`);
+
+  let rows='';
+  g.rows.forEach(({ds,it})=>{
+    const byLabel={}; ds.systems.forEach(s=>byLabel[s.label]=it.clips[s.key]);
+    const clip=s=>byLabel[s.label];
+    let mn=Infinity; sys.forEach(s=>{if(!s.gt){const c=clip(s); if(c&&c.m!=null&&c.m<mn)mn=c.m;}});
+    const og=clip(sys.find(s=>s.ours)||{}); let bc=null;
+    sys.filter(s=>s.commercial).forEach(s=>{const c=clip(s); if(c&&c.m!=null&&(!bc||c.m<bc.m))bc={m:c.m,label:s.label};});
+    let win='';
+    if(og&&og.m!=null&&bc&&!ds.nowin){const adv=Math.round(100*(bc.m-og.m)/bc.m);
+      win=`<div class="win">${ds.metric} ${og.m.toFixed(3)} <span class="x">vs best commercial (${esc(bc.label)}) ${bc.m.toFixed(3)} — ${adv}% lower</span></div>`;}
+    let cells='';
+    sys.forEach(s=>{
+      const c=clip(s);
+      const cls=`cell${s.ours?' ours':''}${s.gt?' gtc':''}`;
+      if(!c){cells+=`<td class="${cls}"><span class="na">—</span></td>`; return;}
+      const best=(!s.gt&&c.m!=null&&c.m<=mn+1e-9);
+      cells+=`<td class="${cls}"><button class="pb" data-s="${c.file}" aria-label="play">▶</button>`+
+             (c.m!=null&&!s.gt?`<div class="m${best?' best':''}">${ds.metric} ${c.m.toFixed(3)}</div>`:'')+`</td>`;
+    });
+    rows+=`<tr data-p="${pairOf(it.tag)}"><td class="sent"><span class="tag">${esc(ds.title)}</span>
+      <div class="tx">${highlight(it.text)}</div>${win}</td>${cells}</tr>`;
+  });
+
+  return `<div class="ds">
+    <div class="gridwrap"><table>
+      <thead><tr class="grp">${grpTh}</tr><tr class="sub">${subTh}</tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div></div>`;
+}
+
+function buildGroups(datasets){
+  const by={};
+  datasets.forEach(ds=>ds.items.forEach(it=>{const p=pairOf(it.tag); (by[p]=by[p]||[]).push({ds,it});}));
+  const order=[...PAIRS,...Object.keys(by).filter(p=>!PAIRS.includes(p)).sort()].filter(p=>by[p]);
+  const systems=[]; // union by label; GT first, otherwise manifest order
+  datasets.forEach(ds=>ds.systems.forEach(s=>{ if(!systems.some(x=>x.label===s.label)) s.gt?systems.unshift(s):systems.push(s); }));
+  return {pairs:order, systems, rows:datasets.flatMap(ds=>ds.items.map(it=>({ds,it})))}; // manifest order: CSEAL, HiKE, ASCEND, JSUT
+}
+
+// ---- compact play buttons: one clip at a time ----
+let CURA=null, CURB=null;
+function playToggle(btn){
+  if(CURB===btn && CURA && !CURA.paused){ CURA.pause(); return; }
+  if(CURA) CURA.pause();
+  CURA=new Audio(btn.dataset.s); CURB=btn;
+  btn.textContent='⏸'; btn.classList.add('playing');
+  const reset=()=>{ btn.textContent='▶'; btn.classList.remove('playing'); };
+  CURA.onended=reset; CURA.onpause=reset;
+  CURA.play().catch(reset);
+}
+document.addEventListener('click', e=>{ const b=e.target.closest('.pb'); if(b) playToggle(b); });
+
+fetch("manifest.json").then(r=>r.json()).then(m=>{
+  M=m;
+  const withItems=m.datasets.filter(d=>d.items&&d.items.length);
+  const g=buildGroups(withItems);
+  $("panel").innerHTML=g.rows.length?render(g):"<p>No samples available.</p>";
+  const tabs=$("tabs");
+  ['all',...g.pairs].forEach((p,i)=>{
+    const t=document.createElement("div"); t.className="tab"+(i===0?" on":""); t.dataset.p=p; t.textContent=p==='all'?'All':p;
+    t.onclick=()=>{
+      [...tabs.children].forEach(x=>x.classList.toggle("on",x===t));
+      document.querySelectorAll('#panel tr[data-p]').forEach(r=>r.classList.toggle('hide',p!=='all'&&r.dataset.p!==p));
+    };
+    tabs.appendChild(t);
+  });
+}).catch(e=>{ $("panel").innerHTML="<p>Failed to load manifest.json</p>"; });
+</script>
+</body>
+</html>
