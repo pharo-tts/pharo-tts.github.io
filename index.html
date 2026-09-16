@@ -37,7 +37,6 @@
   section h2{font-size:22px; margin:0 0 12px; text-align:center;}
   .abstract{max-width:820px; margin:0 auto; font-size:15.5px; color:#2b2f37; text-align:justify;}
   .abstract b{color:var(--ink);}
-  .placeholder{background:#fbf6ea; border:1px dashed #d8c58f; color:#7a6a3f; border-radius:8px; padding:12px 16px;}
 
 
 
@@ -99,11 +98,16 @@
 
   <section id="abstract">
     <h2>Abstract</h2>
-    <p class="abstract placeholder"><b>[Placeholder — replace with the paper abstract.]</b>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Text-to-speech systems frequently mispronounce
-      embedded foreign or borrowed words in code-switched input. We propose PhARO, which uses Phonetic Feature
-      Error Rate (PFER), an articulatory-feature distance between synthesized and target pronunciation, as a
-      verifiable reward for GRPO post-training. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p class="abstract">Modern text-to-speech (TTS) systems systematically misrealize foreign and code-switched words,
+      and the errors are invisible to transcription metrics such as WER and CER. We propose <b>PhARO</b>
+      (Phonetic-Articulatory Reward Optimization): the Phonetic Feature Error Rate (PFER), an articulatory-feature
+      edit distance between the realized IPA transcription and a text-derived target, is used as the reward in GRPO.
+      The target comes from grapheme-to-phoneme conversion, so no reference audio is required, and PhARO steers an
+      existing text-input TTS model without changing its interface or architecture. Trained on CSEAL, our new
+      synthetic English+CJK code-switching dataset, PhARO reduces PFER by 33% over the base model, surpasses
+      proprietary systems, and transfers to held-out benchmarks and monolingual Japanese. Robustness checks
+      (a 27-condition scoring grid, forced-aligned prosodic analysis, a second backbone) and a blind 14-listener
+      study (+1.19 pronunciation MOS at unchanged naturalness) confirm the gains.</p>
   </section>
 
   <section id="samples">
